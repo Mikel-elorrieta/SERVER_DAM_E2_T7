@@ -6,7 +6,7 @@ Lengoiaiak: Java
 
 2025/01/13
 
-Errubrika:
+
 
 Enuntziatua:
 
