@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import Controlers.HibernateUtil;
-import modelo.Users;
 
 public class Kontsultak {
 
@@ -29,6 +29,25 @@ public class Kontsultak {
 		return list;
 	}
 	
+	public static int conectarCrud(String query) {
+	    Session session = HibernateUtil.getSessionFactory().openSession();
+	    Transaction transaction = null;
+	    int rowsAffected = 0;
+
+	    try {
+	        transaction = session.beginTransaction();
+	        Query q = session.createQuery(query);
+	        rowsAffected = q.executeUpdate();
+	        transaction.commit();
+	    } catch (Exception e) {
+	        if (transaction != null) transaction.rollback();
+	        e.printStackTrace();
+	    } finally {
+	        session.close();
+	    }
+
+	    return rowsAffected;
+	}
 	
 	
 	public static String getAllUsers() {
@@ -44,6 +63,39 @@ public class Kontsultak {
 		query = "FROM Users WHERE nombre = '"+  param  +"' ";
 		return query;
 		
+	}
+	
+	public static String getUserByEmail(String param) {
+
+		String query = "";
+		query = "FROM Users WHERE email = '" + param + "' ";
+		return query;
+	}
+	
+	public static String getHorariosByUserId(String param) {
+		
+		String query = "";
+		query = "FROM Horarios h WHERE h.id.profeId  = '"+  param  +"' ";
+		System.out.println(query);
+		return query;
+		
+	}
+	
+	public static String isLoginOk(String user, String pass) {
+
+		String query = "";
+		query = "FROM Users WHERE username = '" + user + "' AND password = '" + pass + "' ";
+		System.out.println(query);
+		return query;
+
+	}
+	
+	public static String updatePassword(String param, String pass) {
+		
+		String query = "";
+		query = "UPDATE Users SET password = '" + pass + "' WHERE id = '" + param + "' ";
+		System.out.println(query);
+		return query;
 	}
 
 }

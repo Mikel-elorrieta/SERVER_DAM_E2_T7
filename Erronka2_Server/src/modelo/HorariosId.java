@@ -6,6 +6,8 @@ package modelo;
  */
 public class HorariosId implements java.io.Serializable {
 
+	
+	private static final long serialVersionUID = 1294895969118328191L;
 	private String dia;
 	private String hora;
 	private int moduloId;
@@ -78,5 +80,12 @@ public class HorariosId implements java.io.Serializable {
 		result = 37 * result + this.getProfeId();
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "HorariosId [dia=" + dia + ", hora=" + hora + ", moduloId=" + moduloId + ", profeId=" + profeId + "]";
+	}
+	
+	
 
 }

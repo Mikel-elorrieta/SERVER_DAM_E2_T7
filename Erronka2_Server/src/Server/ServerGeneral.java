@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import modelo.Horarios;
 import modelo.Users;
 
 public class ServerGeneral {
@@ -28,9 +29,24 @@ public class ServerGeneral {
 
 	}
 
-	public static Object consultar(String key) {
+	
+	
+	/**
+	 * Metodo que recibe un string con una key y devuelve un objeto
+	 * 
+	 * getAllUsers -> devuelve un arraylist de usuarios
+	 * getUserByName/<name> -> devuelve un usuario
+	 * getHorariosByUserId/<id> -> devuelve un arraylist de horarios
+	 * isLoginOk/<user>/<pass> -> devuelve true o false
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static  Object consultar(String key) {
 		
-		ArrayList<Users> list = new ArrayList();
+		ArrayList<Users> listU = new ArrayList();
+		ArrayList<Horarios> listH = new ArrayList();
+
 		
 		String[] k = key.split("/");
 
@@ -39,16 +55,34 @@ public class ServerGeneral {
 		switch (k[0]) {
 
 		case "getAllUsers":
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getAllUsers()));
+			return listU;
 			
-			list = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getAllUsers()));
-			return list;
 		case "getUserByName":
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getUserByName(k[1])));
+			return listU.get(0);
 			
-			ArrayList<Users> list2 = new ArrayList();
-			list = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getUserByName(k[1])));
-			return list.get(0);
-		
-		
+		case "getHorariosByUserId":
+			listH = ((ArrayList<Horarios>) Kontsultak.conectar(Kontsultak.getHorariosByUserId(k[1])));
+			return listH;
+		case "isLoginOk":
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.isLoginOk(k[1], k[2])));
+			if (listU.size() > 0) {
+				return true;
+			}else {
+				return  false;
+			}
+		case "forgotPassword":
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getUserByEmail(k[1])));
+			if (listU.size() > 0) {
+			Kontsultak.conectarCrud(Kontsultak.updatePassword(listU.get(0).getId() + "", Utils.randomPass()));
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getUserByEmail(k[1])));
+			Utils.sendEmail(listU.get(0));
+			return true;
+			}else {
+			return  false;
+			}
+			
 		}
 		
 			

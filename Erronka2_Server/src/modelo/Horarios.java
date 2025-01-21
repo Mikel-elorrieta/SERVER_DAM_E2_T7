@@ -6,6 +6,7 @@ package modelo;
  */
 public class Horarios implements java.io.Serializable {
 
+	private static final long serialVersionUID = 8261138074800654137L;
 	private HorariosId id;
 	private Users users;
 	private Modulos modulos;
@@ -42,5 +43,12 @@ public class Horarios implements java.io.Serializable {
 	public void setModulos(Modulos modulos) {
 		this.modulos = modulos;
 	}
+
+	@Override
+	public String toString() {
+		return "Horarios [id=" + id + ", users=" + users + ", modulos=" + modulos + "]";
+	}
+	
+	
 
 }
