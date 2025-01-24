@@ -91,6 +91,11 @@ public class ServerGeneral {
 			listB = ((ArrayList<Reuniones>) Kontsultak.conectar(Kontsultak.getBilerakByUserId(k[1])));
 			return listB;
 			
+		case "getAllTeachers":
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getAllTeachers()));
+			return listU;
+		
+		
 		}
 		
 			

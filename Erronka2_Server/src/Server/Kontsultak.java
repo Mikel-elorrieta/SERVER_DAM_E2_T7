@@ -57,6 +57,14 @@ public class Kontsultak {
 		return query;
 
 	}
+	
+	public static String getAllTeachers() {
+
+		String query = "";
+		query = "FROM Users WHERE tipos.name = 'profesor'";
+		return query;
+
+	}
 
 	public static String getUserByName(String param) {
 
