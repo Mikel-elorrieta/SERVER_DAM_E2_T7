@@ -11,6 +11,8 @@ import java.sql.Timestamp;
  */
 public class Reuniones implements java.io.Serializable {
 
+	private static final long serialVersionUID = 9204173596580972639L;
+
 	private Integer idReunion;
 	private Users usersByProfesorId;
 	private Users usersByAlumnoId;
@@ -122,5 +124,14 @@ public class Reuniones implements java.io.Serializable {
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
+
+	@Override
+	public String toString() {
+		return "Reuniones [idReunion=" + idReunion + ", usersByProfesorId=" + usersByProfesorId + ", usersByAlumnoId="
+				+ usersByAlumnoId + ", estado=" + estado + ", estadoEus=" + estadoEus + ", idCentro=" + idCentro
+				+ ", titulo=" + titulo + ", asunto=" + asunto + ", aula=" + aula + ", fecha=" + fecha + "]";
+	}
+	
+	
 
 }

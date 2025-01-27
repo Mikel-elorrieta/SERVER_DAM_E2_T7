@@ -28,59 +28,68 @@ public class Kontsultak {
 		session.close();
 		return list;
 	}
-	
+
 	public static int conectarCrud(String query) {
-	    Session session = HibernateUtil.getSessionFactory().openSession();
-	    Transaction transaction = null;
-	    int rowsAffected = 0;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		int rowsAffected = 0;
 
-	    try {
-	        transaction = session.beginTransaction();
-	        Query q = session.createQuery(query);
-	        rowsAffected = q.executeUpdate();
-	        transaction.commit();
-	    } catch (Exception e) {
-	        if (transaction != null) transaction.rollback();
-	        e.printStackTrace();
-	    } finally {
-	        session.close();
-	    }
+		try {
+			transaction = session.beginTransaction();
+			Query q = session.createQuery(query);
+			rowsAffected = q.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 
-	    return rowsAffected;
+		return rowsAffected;
 	}
-	
-	
+
 	public static String getAllUsers() {
-		
+
 		String query = "";
 		query = "FROM Users";
 		return query;
-		
-	}
-	public static String getUserByName(String param) {
-		
-		String query = "";
-		query = "FROM Users WHERE nombre = '"+  param  +"' ";
-		return query;
-		
+
 	}
 	
+	public static String getAllTeachers() {
+
+		String query = "";
+		query = "FROM Users WHERE tipos.name = 'profesor'";
+		return query;
+
+	}
+
+	public static String getUserByName(String param) {
+
+		String query = "";
+		query = "FROM Users WHERE nombre = '" + param + "' ";
+		return query;
+
+	}
+
 	public static String getUserByEmail(String param) {
 
 		String query = "";
 		query = "FROM Users WHERE email = '" + param + "' ";
 		return query;
 	}
-	
+
 	public static String getHorariosByUserId(String param) {
-		
+
 		String query = "";
-		query = "FROM Horarios h WHERE h.id.profeId  = '"+  param  +"' ";
+		query = "FROM Horarios h WHERE h.id.profeId  = '" + param + "' ";
 		System.out.println(query);
 		return query;
-		
+
 	}
-	
+
 	public static String isLoginOk(String user, String pass) {
 
 		String query = "";
@@ -89,13 +98,19 @@ public class Kontsultak {
 		return query;
 
 	}
-	
+
 	public static String updatePassword(String param, String pass) {
-		
+
 		String query = "";
 		query = "UPDATE Users SET password = '" + pass + "' WHERE id = '" + param + "' ";
 		System.out.println(query);
 		return query;
 	}
 
+	public static String getBilerakByUserId(String param) {
+		String query = "";
+		query = "FROM Reuniones WHERE profesor_id = '" + param + "' ";
+		return query;
+
+	}
 }

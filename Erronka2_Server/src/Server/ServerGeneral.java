@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import modelo.Horarios;
+import modelo.Reuniones;
 import modelo.Users;
 
 public class ServerGeneral {
@@ -13,7 +14,7 @@ public class ServerGeneral {
 	public static void main(String[] args) {
 
 		try {
-			ServerSocket serverSocket = new ServerSocket(20000);
+			ServerSocket serverSocket = new ServerSocket(10000);
 			Socket socket = null;
 			while (true) {
 
@@ -38,6 +39,8 @@ public class ServerGeneral {
 	 * getUserByName/<name> -> devuelve un usuario
 	 * getHorariosByUserId/<id> -> devuelve un arraylist de horarios
 	 * isLoginOk/<user>/<pass> -> devuelve true o false
+	 * forgotPassword/<email> -> devuelve true o false
+	 * getBilerakByUserId/<id> -> devuelve un arraylist de reuniones
 	 * 
 	 * @param key
 	 * @return
@@ -46,6 +49,7 @@ public class ServerGeneral {
 		
 		ArrayList<Users> listU = new ArrayList();
 		ArrayList<Horarios> listH = new ArrayList();
+		ArrayList<Reuniones> listB = new ArrayList();
 
 		
 		String[] k = key.split("/");
@@ -83,6 +87,15 @@ public class ServerGeneral {
 			return  false;
 			}
 			
+		case "getBilerakByUserId":
+			listB = ((ArrayList<Reuniones>) Kontsultak.conectar(Kontsultak.getBilerakByUserId(k[1])));
+			return listB;
+			
+		case "getAllTeachers":
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getAllTeachers()));
+			return listU;
+		
+		
 		}
 		
 
