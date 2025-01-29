@@ -69,7 +69,7 @@ public class Kontsultak {
 	public static String getUserByName(String param) {
 
 		String query = "";
-		query = "FROM Users WHERE nombre = '" + param + "' ";
+		query = "FROM Users WHERE username = '" + param + "' ";
 		return query;
 
 	}
@@ -84,7 +84,7 @@ public class Kontsultak {
 	public static String getHorariosByUserId(String param) {
 
 		String query = "";
-		query = "FROM Horarios h WHERE h.id.profeId  = '" + param + "' ";
+		query = "FROM Horarios h WHERE h.id.profeId  = '" + param + "' OR h.users.id = '" + param + "' ";
 		System.out.println(query);
 		return query;
 
@@ -94,6 +94,15 @@ public class Kontsultak {
 
 		String query = "";
 		query = "FROM Users WHERE username = '" + user + "' AND password = '" + pass + "' ";
+		System.out.println(query);
+		return query;
+
+	}
+	
+	public static String updateImg(String img, String param) {
+
+		String query = "";
+		query = "UPDATE Users SET argazkia = '" + img + "' WHERE id = '" + param + "' ";
 		System.out.println(query);
 		return query;
 
@@ -112,5 +121,12 @@ public class Kontsultak {
 		query = "FROM Reuniones WHERE profesor_id = '" + param + "' ";
 		return query;
 
+	}
+	
+	public static String getMatriculacionByUserId(String param) {
+		String query = "";
+		query = "FROM Matriculaciones WHERE users.id  = '" + param + "' ";
+		return query;
+		
 	}
 }

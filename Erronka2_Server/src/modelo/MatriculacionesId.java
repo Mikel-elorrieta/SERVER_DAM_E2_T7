@@ -10,6 +10,8 @@ import java.util.Date;
  */
 public class MatriculacionesId implements java.io.Serializable {
 
+	
+	private static final long serialVersionUID = 4784579289132702178L;
 	private int alumId;
 	private int cicloId;
 	private int curso;
@@ -57,29 +59,10 @@ public class MatriculacionesId implements java.io.Serializable {
 		this.fecha = fecha;
 	}
 
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof MatriculacionesId))
-			return false;
-		MatriculacionesId castOther = (MatriculacionesId) other;
-
-		return (this.getAlumId() == castOther.getAlumId()) && (this.getCicloId() == castOther.getCicloId())
-				&& (this.getCurso() == castOther.getCurso())
-				&& ((this.getFecha() == castOther.getFecha()) || (this.getFecha() != null
-						&& castOther.getFecha() != null && this.getFecha().equals(castOther.getFecha())));
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + this.getAlumId();
-		result = 37 * result + this.getCicloId();
-		result = 37 * result + this.getCurso();
-		result = 37 * result + (getFecha() == null ? 0 : this.getFecha().hashCode());
-		return result;
+	@Override
+	public String toString() {
+		return "MatriculacionesId [alumId=" + alumId + ", cicloId=" + cicloId + ", curso=" + curso + ", fecha=" + fecha
+				+ "]";
 	}
 
 }

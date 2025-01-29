@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import modelo.Horarios;
+import modelo.Matriculaciones;
 import modelo.Reuniones;
 import modelo.Users;
 
@@ -14,7 +15,7 @@ public class ServerGeneral {
 	public static void main(String[] args) {
 
 		try {
-			ServerSocket serverSocket = new ServerSocket(10000);
+			ServerSocket serverSocket = new ServerSocket(20000);
 			Socket socket = null;
 			while (true) {
 
@@ -95,6 +96,14 @@ public class ServerGeneral {
 			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getAllTeachers()));
 			return listU;
 		
+		case "updateImg":
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getAllTeachers()));
+			return listU;
+			
+		case "getMatriculacionByUserId":
+			ArrayList<Matriculaciones> ListMa = ((ArrayList<Matriculaciones>) Kontsultak.conectar(Kontsultak.getMatriculacionByUserId(k[1])));
+			Matriculaciones ma = ListMa.get(0);
+			return ma ;
 		
 		}
 		

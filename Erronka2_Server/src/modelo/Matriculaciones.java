@@ -6,6 +6,7 @@ package modelo;
  */
 public class Matriculaciones implements java.io.Serializable {
 
+	private static final long serialVersionUID = 4781572807614014091L;
 	private MatriculacionesId id;
 	private Ciclos ciclos;
 	private Users users;
@@ -41,6 +42,10 @@ public class Matriculaciones implements java.io.Serializable {
 
 	public void setUsers(Users users) {
 		this.users = users;
+	}
+	
+	public String toString() {
+		return "Matriculaciones [id=" + id + ", ciclos=" + ciclos + ", users=" + users + "]";
 	}
 
 }
