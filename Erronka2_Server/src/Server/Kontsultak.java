@@ -57,7 +57,7 @@ public class Kontsultak {
 		return query;
 
 	}
-	
+
 	public static String getAllTeachers() {
 
 		String query = "";
@@ -81,10 +81,26 @@ public class Kontsultak {
 		return query;
 	}
 
-	public static String getHorariosByUserId(String param) {
+	public static String getHorariosByProfeId(String param) {
 
 		String query = "";
-		query = "FROM Horarios h WHERE h.id.profeId  = '" + param + "' OR h.users.id = '" + param + "' ";
+		query = "FROM Horarios h WHERE h.id.profeId  = '" + param + "'";
+		System.out.println(query);
+		return query;
+
+	}
+
+	public static String getHorariosByAlumnoId(String param) {
+
+		String query = "";
+		 query = "from Horarios as h "
+                + "join fetch h.modulos as m "
+                + "join fetch h.users as u "
+                + "join fetch u.tipos as t "
+                + "join fetch m.ciclos as c "
+                + "join fetch c.matriculacioneses as mat "
+                + "where mat.id.alumId = '" + param  + " "
+                + "' and m.nombre not in ('Tutoria', 'Guardia')";
 		System.out.println(query);
 		return query;
 
@@ -93,12 +109,12 @@ public class Kontsultak {
 	public static String isLoginOk(String user, String pass) {
 
 		String query = "";
-		query = "FROM Users WHERE username = '" + user + "' AND password = '" + pass + "' ";
+		query = "FROM Users WHERE username = '" + user + "'";
 		System.out.println(query);
 		return query;
 
 	}
-	
+
 	public static String updateImg(String img, String param) {
 
 		String query = "";
@@ -122,11 +138,11 @@ public class Kontsultak {
 		return query;
 
 	}
-	
+
 	public static String getMatriculacionByUserId(String param) {
 		String query = "";
 		query = "FROM Matriculaciones WHERE users.id  = '" + param + "' ";
 		return query;
-		
+
 	}
 }

@@ -67,9 +67,14 @@ public class ServerGeneral {
 			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getUserByName(k[1])));
 			return listU.get(0);
 			
-		case "getHorariosByUserId":
-			listH = ((ArrayList<Horarios>) Kontsultak.conectar(Kontsultak.getHorariosByUserId(k[1])));
+		case "getHorariosByProfeId":
+			listH = ((ArrayList<Horarios>) Kontsultak.conectar(Kontsultak.getHorariosByProfeId(k[1])));
 			return listH;
+			
+		case "getHorariosByAlumnoId":
+			listH = ((ArrayList<Horarios>) Kontsultak.conectar(Kontsultak.getHorariosByAlumnoId(k[1])));
+			return listH;
+			
 		case "isLoginOk":
 			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.isLoginOk(k[1], k[2])));
 			if (listU.size() > 0) {
