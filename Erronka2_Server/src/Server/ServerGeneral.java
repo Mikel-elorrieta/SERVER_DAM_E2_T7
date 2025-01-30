@@ -109,6 +109,8 @@ public class ServerGeneral {
 			ArrayList<Matriculaciones> ListMa = ((ArrayList<Matriculaciones>) Kontsultak.conectar(Kontsultak.getMatriculacionByUserId(k[1])));
 			Matriculaciones ma = ListMa.get(0);
 			return ma ;
+			
+		
 		
 		}
 		

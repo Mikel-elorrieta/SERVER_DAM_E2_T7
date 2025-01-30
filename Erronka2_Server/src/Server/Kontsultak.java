@@ -93,7 +93,7 @@ public class Kontsultak {
 	public static String getHorariosByAlumnoId(String param) {
 
 		String query = "";
-		 query = "from Horarios as h "
+		 query = "select distinct h from Horarios as h "
                 + "join fetch h.modulos as m "
                 + "join fetch h.users as u "
                 + "join fetch u.tipos as t "
@@ -145,4 +145,6 @@ public class Kontsultak {
 		return query;
 
 	}
+	
+	
 }
