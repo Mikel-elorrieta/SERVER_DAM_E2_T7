@@ -16,5 +16,6 @@
         <mapping resource="modelo/Matriculaciones.hbm.xml"/>
         <mapping resource="modelo/Horarios.hbm.xml"/>
         <mapping resource="modelo/Reuniones.hbm.xml"/>
+        <mapping resource="modelo/VistaHorariosUsuarios.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

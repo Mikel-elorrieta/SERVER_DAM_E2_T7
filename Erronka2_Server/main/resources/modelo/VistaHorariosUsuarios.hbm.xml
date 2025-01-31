@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<hibernate-mapping>
+    <class name="modelo.VistaHorariosUsuarios" table="HorariosAlumno">
+        <composite-id>
+            <!-- Clave primaria compuesta: combinación de dia y hora -->
+            <key-property name="dia" column="dia" />
+            <key-property name="hora" column="hora" />
+            <key-property name="alumId" column="alum_id" />
+        </composite-id>
+
+        <property name="moduloNombre" column="nombre"/>
+    </class>
+</hibernate-mapping>

@@ -22,6 +22,8 @@ public class Kontsultak {
 		List<Object> emps = (List<Object>) q.list();
 		for (int i = 0; i < emps.size(); i++) {
 			Object use = emps.get(i);
+			System.out.println(use);
+			
 			list.add(use);
 		}
 		System.out.println(list);
@@ -90,17 +92,26 @@ public class Kontsultak {
 
 	}
 
+//	public static String getHorariosByAlumnoId(String param) {
+//
+//		String query = "";
+//		 query = "select distinct h from Horarios as h "
+//                + "join fetch h.modulos as m "
+//                + "join fetch h.users as u "
+//                + "join fetch u.tipos as t "
+//                + "join fetch m.ciclos as c "
+//                + "join fetch c.matriculacioneses as mat "
+//                + "where mat.id.alumId = '" + param  + " "
+//                + "' and m.nombre not in ('Tutoria', 'Guardia')";
+//		System.out.println(query);
+//		return query;
+//
+//	}
+	
 	public static String getHorariosByAlumnoId(String param) {
 
 		String query = "";
-		 query = "select distinct h from Horarios as h "
-                + "join fetch h.modulos as m "
-                + "join fetch h.users as u "
-                + "join fetch u.tipos as t "
-                + "join fetch m.ciclos as c "
-                + "join fetch c.matriculacioneses as mat "
-                + "where mat.id.alumId = '" + param  + " "
-                + "' and m.nombre not in ('Tutoria', 'Guardia')";
+		query = "FROM VistaHorariosUsuarios v WHERE v.alumId = '" + param + "'";
 		System.out.println(query);
 		return query;
 
@@ -145,6 +156,19 @@ public class Kontsultak {
 		return query;
 
 	}
+	
+	public static String updateStatus(String estado, String id) {
+        String query = "";
+        query = "UPDATE Reuniones SET estado = '" + estado + "' WHERE id = '" + id + "' ";
+        System.out.println(query);
+        return query;
+    }
+	
+	
+	
+	
+
+
 	
 	
 }

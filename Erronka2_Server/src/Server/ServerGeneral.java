@@ -1,16 +1,54 @@
 package Server;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import modelo.Horarios;
+import modelo.Ikastetxe;
 import modelo.Matriculaciones;
 import modelo.Reuniones;
 import modelo.Users;
-
+import modelo.VistaHorariosUsuarios;
 public class ServerGeneral {
+	
+	public static List<Ikastetxe> getIkastetxeListFromJson(String json) {
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    List<Ikastetxe> ikastetxeList = null;
+
+	    try {
+	        // Deserializamos el JSON directamente a una lista de Ikastetxe
+	        ikastetxeList = objectMapper.readValue(json, objectMapper.getTypeFactory().constructCollectionType(List.class, Ikastetxe.class));
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    return ikastetxeList;
+	}
+	
+	
+	public static String readJsonFromFile(String filePath) {
+	    StringBuilder jsonContent = new StringBuilder();
+	    
+	    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+	        String line;
+	        while ((line = br.readLine()) != null) {
+	            jsonContent.append(line);  // No agregar "\n"
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return jsonContent.toString();
+	}
+
 
 	public static void main(String[] args) {
 
@@ -51,6 +89,7 @@ public class ServerGeneral {
 		ArrayList<Users> listU = new ArrayList();
 		ArrayList<Horarios> listH = new ArrayList();
 		ArrayList<Reuniones> listB = new ArrayList();
+		ArrayList<VistaHorariosUsuarios> listV = new ArrayList();
 
 		
 		String[] k = key.split("/");
@@ -72,8 +111,8 @@ public class ServerGeneral {
 			return listH;
 			
 		case "getHorariosByAlumnoId":
-			listH = ((ArrayList<Horarios>) Kontsultak.conectar(Kontsultak.getHorariosByAlumnoId(k[1])));
-			return listH;
+			listV = ((ArrayList<VistaHorariosUsuarios>) Kontsultak.conectar(Kontsultak.getHorariosByAlumnoId(k[1])));
+			return listV;
 			
 		case "isLoginOk":
 			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.isLoginOk(k[1], k[2])));
@@ -110,7 +149,17 @@ public class ServerGeneral {
 			Matriculaciones ma = ListMa.get(0);
 			return ma ;
 			
-		
+		case "updateStatus":
+            Kontsultak.conectarCrud(Kontsultak.updateStatus(k[1], k[2]));
+            return true;
+            
+		case "getAllIkastetxeak":
+		    String json = readJsonFromFile("src/elorson.json");
+		    System.out.println(json);
+		    List<Ikastetxe> ikastetxeList = getIkastetxeListFromJson(json);
+		    return ikastetxeList;
+			
+			
 		
 		}
 		
