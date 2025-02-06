@@ -22,7 +22,7 @@ public class Kontsultak {
 		List<Object> emps = (List<Object>) q.list();
 		for (int i = 0; i < emps.size(); i++) {
 			Object use = emps.get(i);
-			System.out.println(use);
+			
 			
 			list.add(use);
 		}
@@ -56,6 +56,13 @@ public class Kontsultak {
 
 		String query = "";
 		query = "FROM Users";
+		return query;
+
+	}
+	public static String getAllAlumnos() {
+
+		String query = "";
+		query = "FROM Users WHERE tipos.name = 'alumno'";
 		return query;
 
 	}
@@ -120,7 +127,7 @@ public class Kontsultak {
 	public static String isLoginOk(String user, String pass) {
 
 		String query = "";
-		query = "FROM Users WHERE username = '" + user + "'";
+		query = "FROM Users WHERE username = '" + user + "' and password = '" + pass + "'";
 		System.out.println(query);
 		return query;
 
@@ -143,9 +150,16 @@ public class Kontsultak {
 		return query;
 	}
 
-	public static String getBilerakByUserId(String param) {
+	public static String getBilerakByProfesorId(String param) {
 		String query = "";
-		query = "FROM Reuniones WHERE profesor_id = '" + param + "' ";
+		query = "FROM Reuniones WHERE usersByProfesorId.id = '" + param + "' ";
+		return query;
+
+	}
+	
+	public static String getBilerakByAlumnoId(String param) {
+		String query = "";
+		query = "FROM Reuniones WHERE usersByAlumnoId.id = '" + param + "' ";
 		return query;
 
 	}

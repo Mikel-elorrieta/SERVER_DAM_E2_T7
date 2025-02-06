@@ -206,7 +206,6 @@ public class Users implements java.io.Serializable {
 	            ", direccion=" + direccion + 
 	            ", telefono1=" + telefono1 + 
 	            ", telefono2=" + telefono2 + 
-	            ", argazkia=" + Arrays.toString(argazkia) + 
 	            ", matriculaciones=" + matriculacioneses.size() +
 	            ", reunionesProfesor=" + reunionesesForProfesorId.size() +
 	            ", reunionesAlumno=" + reunionesesForAlumnoId.size() +

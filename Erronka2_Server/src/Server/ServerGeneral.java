@@ -101,6 +101,10 @@ public class ServerGeneral {
 		case "getAllUsers":
 			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getAllUsers()));
 			return listU;
+		
+		case "getAllAlumnos":
+			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getAllAlumnos()));
+			return listU;
 			
 		case "getUserByName":
 			listU = ((ArrayList<Users>) Kontsultak.conectar(Kontsultak.getUserByName(k[1])));
@@ -132,8 +136,12 @@ public class ServerGeneral {
 			return  false;
 			}
 			
-		case "getBilerakByUserId":
-			listB = ((ArrayList<Reuniones>) Kontsultak.conectar(Kontsultak.getBilerakByUserId(k[1])));
+		case "getBilerakByProfesorId":
+			listB = ((ArrayList<Reuniones>) Kontsultak.conectar(Kontsultak.getBilerakByProfesorId(k[1])));
+			return listB;
+			
+		case "getBilerakByAlumnoId":
+			listB = ((ArrayList<Reuniones>) Kontsultak.conectar(Kontsultak.getBilerakByAlumnoId(k[1])));
 			return listB;
 			
 		case "getAllTeachers":
