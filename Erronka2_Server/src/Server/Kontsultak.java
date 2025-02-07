@@ -10,7 +10,13 @@ import org.hibernate.Transaction;
 import Controlers.HibernateUtil;
 
 public class Kontsultak {
-
+	
+	/**
+	 * Ejecuta el HQL query recibido y devuelve una lista de tipo Objeto como resultado
+	 *
+	 * @param query de HQL query para ejecutar
+	 * @return lista de tipo Objeto de la query
+	 */
 	public static Object conectar(String query) {
 
 		ArrayList<Object> list = new ArrayList();
@@ -22,15 +28,25 @@ public class Kontsultak {
 		List<Object> emps = (List<Object>) q.list();
 		for (int i = 0; i < emps.size(); i++) {
 			Object use = emps.get(i);
-			
-			
+
+
 			list.add(use);
 		}
 		System.out.println(list);
 		session.close();
 		return list;
 	}
-
+/**
+ * Ejecuta el HQL query recibido y devuelve un entero con el numero de filas afectadas
+ * 
+ * Los querys que afectan a la base de datos como insert, update o delete
+ * 
+ * transaction.commit() para confirmar los cambios
+ * transaction.rollback() para deshacer
+ * 
+ * @param query
+ * @return numero de filas afectadas
+ */
 	public static int conectarCrud(String query) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
